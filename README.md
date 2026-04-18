@@ -68,11 +68,54 @@ Next.js rewrites proxy `/api/auth/*` and `/trpc/*` to the Elysia server so cooki
 - tRPC procedures use Better Auth `getSession` on the server; mutations/queries use Zod.  
 - Elysia uses `elysia-rate-limit` and CORS restricted to `WEB_ORIGIN`.  
 
-## Deployment sketch
+## Docker (local full stack)
 
-- **Frontend:** Vercel — set `NEXT_PUBLIC_APP_URL`, `INTERNAL_API_URL` (your public API URL), and ensure the API allows that origin in `WEB_ORIGIN` / Better Auth `trustedOrigins`.  
-- **Backend:** Railway / Fly.io / Render — expose HTTPS, set `DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL` (public app URL), `WEB_ORIGIN`.  
-- **Database:** Neon — use the pooled connection string for serverless runtimes.  
+1. Copy envs and fill secrets:
+
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Start the full stack:
+
+   ```bash
+   docker compose up --build
+   ```
+
+3. Open [http://localhost:3000](http://localhost:3000).  
+   The web container reaches the API through `http://server:3001` internally, while you can still access API health at [http://localhost:3001/health](http://localhost:3001/health).
+
+## Deployment (Vercel + Render)
+
+### 1) Backend on Render (Docker)
+
+- Create a **Web Service** connected to this repository.
+- Choose **Docker** deployment and set Dockerfile path to `apps/server/Dockerfile`.
+- Set environment variables:
+  - `DATABASE_URL`
+  - `BETTER_AUTH_SECRET`
+  - `WEB_ORIGIN=https://<your-vercel-domain>`
+  - `BETTER_AUTH_URL=https://<your-vercel-domain>`
+- `PORT` is provided by Render automatically.
+- After deploy, note your public API URL, e.g. `https://<your-api>.onrender.com`.
+
+### 2) Frontend on Vercel (Next.js)
+
+- Use repository root with `vercel.json` as the source of truth.
+- Required environment variables:
+  - `NEXT_PUBLIC_APP_URL=https://<your-vercel-domain>`
+  - `INTERNAL_API_URL=https://<your-api>.onrender.com`
+- Keep `WEB_ORIGIN` and `BETTER_AUTH_URL` on Render aligned to the same Vercel URL.
+
+### 3) Database on Neon
+
+- Use the pooled Postgres connection string for `DATABASE_URL`.
+- Run schema changes before/after deployment as needed:
+
+  ```bash
+  bun run db:generate
+  bun run db:migrate
+  ```
 
 ## Phase 2 (ideas)
 
