@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  @apply antialiased;
+}
+
+:root {
+  --dm-bg: #f6f9ff;
+  --dm-surface: #ffffff;
+  --dm-surface-soft: #f9fbff;
+  --dm-text: #1f274f;
+  --dm-text-muted: #5d6485;
+  --dm-border: #d9e0f4;
+}
+
+html.dm-dark {
+  --dm-bg: #0f1530;
+  --dm-surface: #161f44;
+  --dm-surface-soft: #1c2752;
+  --dm-text: #dbe4ff;
+  --dm-text-muted: #aebae8;
+  --dm-border: #2a335f;
+}
+
+html.dm-dark body {
+  background: var(--dm-bg) !important;
+  color: var(--dm-text) !important;
+}
+
+html.dm-dark main,
+html.dm-dark aside,
+html.dm-dark header,
+html.dm-dark nav,
+html.dm-dark article,
+html.dm-dark section,
+html.dm-dark form,
+html.dm-dark ul,
+html.dm-dark li,
+html.dm-dark div[class*="rounded"],
+html.dm-dark input,
+html.dm-dark select,
+html.dm-dark textarea {
+  border-color: var(--dm-border) !important;
+}
+
+html.dm-dark header,
+html.dm-dark nav,
+html.dm-dark article,
+html.dm-dark section,
+html.dm-dark form,
+html.dm-dark div[class*="rounded"] {
+  background-color: var(--dm-surface) !important;
+}
+
+html.dm-dark input,
+html.dm-dark select,
+html.dm-dark textarea {
+  background-color: var(--dm-surface-soft) !important;
+  color: var(--dm-text) !important;
+}
+
+html.dm-dark p,
+html.dm-dark span,
+html.dm-dark h1,
+html.dm-dark h2,
+html.dm-dark h3,
+html.dm-dark h4,
+html.dm-dark h5,
+html.dm-dark h6,
+html.dm-dark label,
+html.dm-dark li,
+html.dm-dark a,
+html.dm-dark button {
+  color: var(--dm-text) !important;
+}

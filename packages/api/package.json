@@ -1,0 +1,20 @@
+{
+  "name": "@student-platform/api",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@student-platform/auth": "workspace:*",
+    "@student-platform/db": "workspace:*",
+    "@trpc/server": "^11.0.0-rc.638",
+    "drizzle-orm": "^0.38.3",
+    "superjson": "^2.2.2",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
+  }
+}

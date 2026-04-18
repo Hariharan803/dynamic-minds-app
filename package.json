@@ -1,0 +1,23 @@
+{
+  "name": "student-platform",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "dev": "concurrently -n server,web -c cyan,magenta \"bun run dev:server\" \"bun run dev:web\"",
+    "dev:server": "bun run --filter @student-platform/server dev",
+    "dev:web": "bun run --filter @student-platform/web dev",
+    "build": "bun run --filter './packages/*' build && bun run --filter './apps/*' build",
+    "db:generate": "bun run --filter @student-platform/db generate",
+    "db:push": "bun run --filter @student-platform/db push",
+    "db:migrate": "bun run --filter @student-platform/db migrate",
+    "db:studio": "bun run --filter @student-platform/db studio",
+    "lint": "bun run --filter './apps/*' lint",
+    "seed:superuser": "bun run scripts/seed-super-user.ts"
+  },
+  "devDependencies": {
+    "@student-platform/auth": "workspace:*",
+    "concurrently": "^9.1.2",
+    "dotenv": "^16.4.7",
+    "typescript": "^5.7.2"
+  }
+}

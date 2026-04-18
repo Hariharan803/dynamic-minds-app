@@ -1,0 +1,25 @@
+{
+  "name": "@student-platform/server",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --watch src/index.ts",
+    "start": "bun run src/index.ts",
+    "build": "bun build src/index.ts --outdir dist --target bun"
+  },
+  "dependencies": {
+    "@elysiajs/cors": "^1.2.0",
+    "elysia-rate-limit": "^4.5.1",
+    "@student-platform/api": "workspace:*",
+    "@student-platform/auth": "workspace:*",
+    "@student-platform/db": "workspace:*",
+    "@trpc/server": "^11.0.0-rc.638",
+    "dotenv": "^16.4.7",
+    "elysia": "^1.2.12"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "@types/bun": "latest"
+  }
+}
