@@ -10,7 +10,7 @@ let authInstance: Auth | null = null;
 export async function getAuth(): Promise<Auth> {
   if (!authInstance) {
     const { createStudentAuth } = await import("@student-platform/auth");
-    authInstance = createStudentAuth([nextCookies()]);
+    authInstance = createStudentAuth([nextCookies()]) as unknown as Auth;
   }
   return authInstance;
 }
