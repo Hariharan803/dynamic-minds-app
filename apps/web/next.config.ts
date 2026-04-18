@@ -11,6 +11,7 @@ const nextConfig: NextConfig = {
   transpilePackages: ["@student-platform/ui", "@student-platform/auth", "@student-platform/db"],
   async rewrites() {
     return [
+      { source: "/api/auth/:path*", destination: `${serverUrl}/api/auth/:path*` },
       { source: "/trpc/:path*", destination: `${serverUrl}/trpc/:path*` },
     ];
   },
