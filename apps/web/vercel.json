@@ -1,0 +1,5 @@
+{
+  "framework": "nextjs",
+  "installCommand": "cd ../.. && npm install -g bun && bun install",
+  "buildCommand": "cd ../.. && bun run --filter @student-platform/web build"
+}
